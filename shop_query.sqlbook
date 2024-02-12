@@ -1,0 +1,33 @@
+-- SQLBook: Code
+CREATE TABLE products (
+    ID INT AUTO_INCREMENT,
+    name VARCHAR(100),
+    price DECIMAL(10,2),
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE orders(
+    ID_orders INT AUTO_INCREMENT,
+    ID_products INT,
+    order_date date NOT NUll,
+    quantity INT NOT NUll,
+    PRIMARY KEY(ID_orders),
+    FOREIGN KEY (ID_products) REFERENCES products(ID_products)
+);
+
+INSERT INTO products(name,price)
+VALUES('iPHONE 15','18000'),
+    ('phone case','400'),
+    ('Air Fryer','2100'),
+    ('Sony Cyber shot','399.9');
+
+INSERT INTO orders(ID_products,order_date,quantity)
+VALUES('2','2024-01-03','1'),
+('4','2023-12-29','2');
+
+SELECT products.name, products.price, orders.order_date, orders.quantity, orders.ID_orders
+FROM products
+INNER JOIN orders ON orders.`ID_products`=products.`ID_products`;
+
+CREATE TABLE products_backup AS
+SELECT * FROM products;
